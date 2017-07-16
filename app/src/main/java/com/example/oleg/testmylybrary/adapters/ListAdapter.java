@@ -1,6 +1,7 @@
 package com.example.oleg.testmylybrary.adapters;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,7 +74,10 @@ public class ListAdapter extends BaseAdapter {
             int image = act.getResources().getIdentifier(models.get(position).getPhotoLinks()[1]
                     , null, act.getPackageName());
             Picasso.with(act).load(image).resize(getDisplayWidth(), 0).into(holder.secondImage);
-
+            holder.buttonRestore.setBackground(act.getResources().getDrawable(R.drawable.button_restore_grey));
+            holder.capture.setTextSize(20);
+            holder.capture.setTypeface(null, Typeface.BOLD);
+            holder.capture.setTextColor(act.getResources().getColor(R.color.colorBlack));
         }
         holder.capture.setText(models.get(position).getHead());
         holder.photoDescription.setText(models.get(position).getPhotoDescription());
