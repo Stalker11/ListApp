@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">TestMyLybrary</string>
+    <string name="button_more">More</string>
+    <string name="button_restore">Restore</string>
+    <string name="events">Events (All)</string>
+</resources>
