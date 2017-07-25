@@ -31,5 +31,6 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.7.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.github.Stalker11:CheckInternetConnection:0.1.1'
     testCompile 'junit:junit:4.12'
 }

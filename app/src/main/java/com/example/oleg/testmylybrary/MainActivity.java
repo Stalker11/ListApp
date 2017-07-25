@@ -2,30 +2,52 @@ package com.example.oleg.testmylybrary;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
 
 import com.example.oleg.testmylybrary.adapters.ListAdapter;
 import com.example.oleg.testmylybrary.models.ListPositionModel;
 import com.example.oleg.testmylybrary.util.AppConstants;
+import com.olegel.checkinternet.Checking;
+import com.olegel.checkinternet.ICallBack;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import me.pinxter.letters.Letters;
+
 public class MainActivity extends AppCompatActivity {
     private ListView listView;
     private ListAdapter adapter;
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        new Checking(new ICallBack() {
+            @Override
+            public void requestCallBack(boolean b, int i) {
+                Log.d(TAG, "requestCallBack: "+b+" "+i);
+            }
+        });
     }
 
     @Override
     protected void onStart() {
         listView = (ListView) findViewById(R.id.list_view);
-        adapter = new ListAdapter(this, createModels());
+        List models = createModels();
+        adapter = new ListAdapter(this, models);
         listView.setAdapter(adapter);
+        Letters letters = new Letters(this, "name", new ArrayList<>(models));
+        letters.setOnSelect(new Letters.OnSelect() {
+            @Override
+            public void onSelect(int i, String s) {
+              listView.smoothScrollToPosition(i);
+                Log.d(TAG, "onSelect: "+i+" "+s);
+            }
+        });
+        Log.d(TAG, "onSelect: "+letters.getLetterLayout());
         super.onStart();
     }
 
